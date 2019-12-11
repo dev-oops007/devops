@@ -1,0 +1,13 @@
+When using Nginx as a reverse proxy you may want to pass through the IP address of the remote user to your backend web server. 
+This must be done using the X-Forwarded-For header. You have a couple of options on how to set this information with Nginx. 
+You can either append the remote hosts IP address to any existing X-Forwarded-For values, 
+or you can simply set the X-Forwarded-For value, which clears out any previous IP’s that would have been on the request.
+
+Edit the nginx configuration file, and add one of the follow lines in where appropriate.
+
+To set the X-Forwarded-For to only contain the remote users IP:
+
+proxy_set_header X-Forwarded-For $remote_addr;
+To append the remote users IP to any existing X-Forwarded-For value:
+
+proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
